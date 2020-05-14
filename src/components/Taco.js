@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import "./Taco.css";
@@ -6,10 +6,14 @@ import "./Taco.css";
 import { fetchTacos } from "../store/actions";
 
 const Taco = ({ fetchTacos, isFetching, tacos }) => {
-  console.log("inside taco", tacos);
+  const [active, setActive] = useState(false);
   useEffect(() => {
     fetchTacos();
   }, [fetchTacos]);
+
+  const toggleClass = () => {
+    setActive(!active);
+  };
 
   return (
     <div className="Taco-Container">
@@ -19,21 +23,41 @@ const Taco = ({ fetchTacos, isFetching, tacos }) => {
 
       {!isFetching && tacos && (
         <div>
-          <div className="Taco-Recipe">
-            <h1 className="Recipe">RECIPE</h1>
-            <div className="Recipe-Description">
-              <p>{tacos.recipe}</p>
+          <div className="scene scene--card">
+            <div className={active ? "card is-flipped": "card"} onClick={toggleClass}>
+              <div className="card__face card__face--front">
+                <img
+                  alt="delicous tacos"
+                  src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                ></img>
+                <h2>Click To See Recipe</h2>
+              </div>
+              <div className="card__face card__face--back">
+                {/* "Taco-Recipe */}
+                <h1 className="Recipe">RECIPE</h1>
+                <div className="Recipe-Description">
+                  <p>{tacos.recipe}</p>
+                </div>
+              </div>
             </div>
           </div>
+          <button
+            className="md-button shop-button"
+            onClick={() => {
+              fetchTacos();
+            }}
+          >
+            See Another One?
+          </button>
 
           {/* condiment  */}
 
           {tacos.condiment !== undefined ? (
             <>
-              <h2 className="Condiment">CONDIMENT NAME</h2>
-              <h2>{tacos.condiment.name}</h2>
+              <h2 className="Condiment">CONDIMENT</h2>
+              <h2 className="Condiment">{tacos.condiment.name}</h2>
               <h2 className="Condiment-Recipe">CONDIMENT RECIPE</h2>
-              <h2>{tacos.condiment.recipe}</h2>
+              <h2 className="Condiment-Recipe">{tacos.condiment.recipe}</h2>
             </>
           ) : (
             <img
@@ -48,9 +72,11 @@ const Taco = ({ fetchTacos, isFetching, tacos }) => {
           {tacos.base_layer !== undefined ? (
             <>
               <h2 className="Base-Layer">BASE LAYER</h2>
-              <h2>{tacos.base_layer.name}</h2>
+              <h2 className="Base-Layer-Name">{tacos.base_layer.name}</h2>
               <h2 className="Base-Layer-Recipe">BASE LAYER RECIPE</h2>
-              <h2>{tacos.base_layer.recipe}</h2>
+              <h2 className="Base-Layer-Description">
+                {tacos.base_layer.recipe}
+              </h2>
             </>
           ) : (
             <img
@@ -63,30 +89,29 @@ const Taco = ({ fetchTacos, isFetching, tacos }) => {
           {/* mixin */}
           {tacos.mixin !== undefined ? (
             <>
-              <h2 className="MIXIN">MIXIN</h2>
-              <h2>{tacos.mixin.name}</h2>
+              <h2 className="Mixin">MIXIN</h2>
+              <h2 className="Mixin-Recipe">{tacos.mixin.name}</h2>
               <h2 className="Mixin-Recipe">MIXIN RECIPE</h2>
-              <h2>{tacos.mixin.recipe}</h2>
+              <h2 className="Mixin-Recipe">{tacos.mixin.recipe}</h2>
             </>
           ) : (
             <img
               alt="delicious tacos"
               className="Mixin-Image"
-              src=""
+              src="https://images.unsplash.com/photo-1579932709647-3a151893f730?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
             ></img>
-          )}  
-           <button
-        className="md-button shop-button"
-        onClick={() => {
-          fetchTacos();
-        }}
-      >
-        See Another One?
-      </button> 
-        
-          </div>
+          )}
+          <button
+            className="md-button shop-button"
+            onClick={() => {
+              fetchTacos();
+            }}
+          >
+            See Another One?
+          </button>
+        </div>
       )}
-      </div>
+    </div>
   );
 };
 
