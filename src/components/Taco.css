@@ -1,0 +1,31 @@
+.Taco-Container{
+    font-family: monospace;
+}
+
+.Recipe-Description{
+    padding: 0rem 3rem 3rem 3rem;
+}
+
+.Title{
+    font-size: 10rem;
+    font-family: monospace;
+    background-color: lightgrey;
+}
+
+.Taco-Recipe{
+    font-size: 2rem;
+    margin: 0 20rem 0 20rem;
+    background: greenyellow;
+}
+
+.Recipe{
+    font-size: 8rem;
+    background: lightblue;
+}
+
+.Condiment, .Base-Layer, .Mixin{
+    font-size: 8rem;
+    background-color: lightpink;
+    padding: 0rem 3rem 0rem 3rem;
+    margin: 2rem 20rem 0 20rem;
+}

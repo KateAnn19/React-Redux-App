@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import CoverTaco from "./components/CoverTaco";
+import Taco from "./components/Taco";
+import "./App.css";
+
+import { Route, Link, Switch } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav>
+        <h1 className="store-header">Tacos 🌮</h1>
+        <div className="nav-links">
+          <Link to="/">Home</Link>
+          <Link to="/taco-list">Taco Shop</Link>
+        </div>
+      </nav>
+      <Switch>
+        <Route path="/taco-list">
+          <Taco />
+        </Route>
+        <Route path="/">
+          <CoverTaco />
+        </Route>
+     </Switch>
     </div>
   );
 }
