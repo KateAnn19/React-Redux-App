@@ -16,6 +16,8 @@ export const fetchTacos = () => {
         console.log(res);
         dispatch({ type: FETCH_TACOS_SUCCESS, payload: res.data });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+          dispatch({type: FETCH_TACOS_FAILURE, payload: err});
+      })
   };
 };

@@ -1,6 +1,7 @@
 import {
     FETCH_TACOS_START,
-    FETCH_TACOS_SUCCESS
+    FETCH_TACOS_SUCCESS,
+    FETCH_TACOS_FAILURE
   } from "../actions";
   
   export const initialState = {
@@ -23,6 +24,12 @@ import {
             ...state,
             isFetching: false,
             tacos: action.payload
+        }
+        case FETCH_TACOS_FAILURE:
+        return {
+            ...state,
+            isFetching: false,
+            error: action.payload
         }
       default:
         return state;
